@@ -24,19 +24,18 @@ console.assert(total === 24)
 
 //need to fix for strings so it won't include 1 in the beginning
 function reduce(array, callback){
-    var total = 1
-    forEach(array, function(element) {
-        total = callback(total, element)
-        console.log(total)
+    var result = array[0]
+    var newArray = array.slice(1)
+    forEach(newArray, function(el) {
+        result = callback(result, el)
     })
-    return total
+    return result
 }
 
 // tests
 // ---
 console.assert(
     reduce([1, 2, 3, 4], function(a, v){ return a*v }) === 24)
-
 // ----------------------------
 // using forEach() from above, write your own map()
 // that takes an array and a function
@@ -47,7 +46,6 @@ function map(array, callback){
     forEach(array, function(element){
         newArray.push(callback(element))
     })
-    console.log(newArray)
     return newArray
 }
 
@@ -66,14 +64,11 @@ console.assert(squares[3] === 16)
 
 function filter(array, callback){
     var newArray = []
-    for (var i = 0; i < array.length; i++) {
-        if (callback(array[i]) === true) {
-            newArray.push(array[i])
+    map (array, function(element) {
+        if (callback(element)) {
+            newArray.push(element)
         }
-        else {
-            continue
-        }
-    }
+    })
     return newArray
 }
 
@@ -82,4 +77,3 @@ function filter(array, callback){
 var evens = filter([1, 2, 3, 4 , 5 ,6], function(v){ return v%2 === 0 })
 console.assert(evens[0] === 2)
 console.assert(evens[1] === 4)
-
