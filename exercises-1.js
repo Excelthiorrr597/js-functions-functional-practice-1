@@ -25,10 +25,10 @@ console.assert(total === 24)
 //need to fix for strings so it won't include 1 in the beginning
 function reduce(array, callback){
     var total = 1
-    for (var i = 0; i < array.length; i++) {
-        total = callback(total, array[i])
+    forEach(array, function(element) {
+        total = callback(total, element)
         console.log(total)
-    }
+    })
     return total
 }
 
@@ -44,9 +44,9 @@ console.assert(
 
 function map(array, callback){
     var newArray = []
-    for (var i = 0; i < array.length; i++) {
-        newArray.push(callback(array[i]))
-    }
+    forEach(array, function(element){
+        newArray.push(callback(element))
+    })
     console.log(newArray)
     return newArray
 }
